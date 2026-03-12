@@ -313,8 +313,9 @@ def expand_fold_specification(
         base_token = tokens[0] if tokens else ""
 
         # JSON inputs: support optional copy number, but no ranges.
-        if base_token.endswith(".json"):
-            path_pf = Path(base_token)
+        base_token_path = f"{features_directory[0]}/{base_token}_af3_input.json"
+        if os.path.isfile(base_token_path):
+            path_pf = Path(base_token_path)
             json_path: Optional[str] = None
             for json_key in (path_pf.name, path_pf.stem):
                 json_path = index.json_path(json_key)
